@@ -14,9 +14,10 @@
     ```
 
 ## Build:
-  * `docker build --no-cache -t`
+  * `docker build --no-cache -t rancher-status-page`
 
 ## Run:
+  * `docker-compose -f docker-compose.yml  up -d web`
   * `rancher-compose --verbose -f rancher-compose.yml -p rancher-status up --upgrade --confirm-upgrade --pull -d`
 
 ## Hit it from the Demandbase Office VPN:
