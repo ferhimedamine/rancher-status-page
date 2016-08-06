@@ -1,0 +1,14 @@
+{
+  "name": "rancher_status_page",
+  "version": "1.0.0",
+  "description": "rancher-compose --verbose -f rancher-compose.yml -p rancher-status up --upgrade --confirm-upgrade --pull -d",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.2"
+  }
+}
