@@ -21,7 +21,7 @@
   * `rancher-compose --verbose -f rancher-compose.yml -p rancher-status up --upgrade --confirm-upgrade --pull -d`
 
 ## Hit it from the Demandbase Office VPN:
-`rancher-dev.demandbase.com`
-`rancher-staging.demandbase.com`
-`rancher-prod.demandbase.com`
+http://rancher-dev.demandbase.com/
+http://rancher-staging.demandbase.com/
+http://rancher-prod.demandbase.com/
 
