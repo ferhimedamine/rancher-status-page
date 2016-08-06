@@ -27,8 +27,6 @@ rancher-status:
     io.rancher.container.hostname_override: "rancher-status-page"
     io.rancher.scheduler.global: "true"
     io.rancher.container.network: "true"
-  upgrade_strategy: 
-    start_first: true
   stdin_open: true
   tty: true
   health_check:
