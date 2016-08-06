@@ -13,7 +13,7 @@
         io.rancher.stack.name: "demandbase/rancher_status_page:${DOCKER_TAG}"
     ```
 
-   * To use the rancher-metadata API, you must enable the following label in your container's rancher-compose file:
+  * To use the rancher-metadata API, you must enable the following label in your container's rancher-compose file:
 
     ```
       io.rancher.container.dns: true
