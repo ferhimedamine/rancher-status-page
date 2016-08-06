@@ -50,8 +50,8 @@ echo '<table style="width:100%; margin-top: 20px; margin-bottom: 20px;" class="t
 
 cat <<HereDoc
  <tr>
-   <th colspan='2'>Service Name:</th>
-   <th colspan='2'>Environment:</th>
+   <th colspan='5'>Service Name:</th>
+   <th colspan='5'>Environment:</th>
    <th>Tag:</th>
   </tr>
 HereDoc
@@ -63,20 +63,20 @@ for stack in ${stacks}; do
   for ind_container in ${containers}; do
     container_name=`echo $ind_container | sed 's/\d*=//'`
     echo "<tr>"
-      echo "<td colspan='2'>"
+      echo "<td colspan='5'>"
         echo $container_name
       echo "</td>"
 
       serv_int=`echo $ind_container | grep -o "\d*"`
       env_name=`curl -s rancher-metadata/latest/stacks/$int/environment_name`
 
-      echo "<td colspan='2'>"
+      echo "<td colspan='5'>"
         echo $env_name
       echo "</td>"
 
       stack_name=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/labels/io.rancher.stack.name`
 
-      echo "<td colspan='2'>"
+      echo "<td colspan='5'>"
        echo $stack_name
       echo "</td>"
 
