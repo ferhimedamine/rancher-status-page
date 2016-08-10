@@ -82,3 +82,9 @@ http://rancher-prod.demandbase.com/
         `export DOCKER_TAG=latest`
 
       * `rancher-compose --verbose -f rancher-compose.yml -p rancher-status up --upgrade --confirm-upgrade --pull -d`
+
+  * You can now execute curl commands in your container against the API or sym-link files through a shared directory in your rancher-server VM, and mount it into the container.
+      * `curl -s rancher-metadata/latest/`
+
+  * More info here (http://docs.rancher.com/rancher/v1.2/en/rancher-services/metadata-service/).
+

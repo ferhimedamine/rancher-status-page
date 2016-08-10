@@ -16,9 +16,9 @@ http.createServer(function(request, response) {
      
        console.log("listening on port 8889");
      
-       const curl = spawn('sh', ['data.sh']);
+       const script_call = spawn('sh', ['data.sh']);
      
-       curl.stdout.on('data', (data) => {
+       script_call.stdout.on('data', (data) => {
          console.log(`${data}`);
          fs.appendFile(fd, data, function(error) {
             if (error) {
@@ -29,11 +29,11 @@ http.createServer(function(request, response) {
          });
        });
      
-       curl.stderr.on('data', (data) => {
+       script_call.stderr.on('data', (data) => {
          console.log(`${data}`);
        });
      
-       curl.on('close', (code) => {
+       script_call.on('close', (code) => {
          console.log(`child process exited with code ${code}`);
            fs.readFile('index.html', function (err, html) {
              if (err) {

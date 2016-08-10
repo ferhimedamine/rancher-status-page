@@ -2,7 +2,7 @@
 
 export result=`curl -s rancher-metadata/latest/hosts`
 
-cat <<InputComesFromHERE
+cat <<HEADER
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +19,14 @@ cat <<InputComesFromHERE
 </head>
 <body>
 <div class="container" style="margin-top: 20px;">
-InputComesFromHERE
+HEADER
 
 echo '<table style="width: 20%; margin-top: 20px;" class="table-bordered table-responsive table-condensed;">'
-cat <<HereDoc
+cat <<StartRows
  <tr>
    <th>Hosts:</th>
   </tr>
-HereDoc
+StartRows
 
 for host in ${result}; do
 
@@ -48,13 +48,14 @@ export stacks=`curl -s rancher-metadata/latest/stacks/`
     
 echo '<table style="width:100%; margin-top: 20px; margin-bottom: 20px;" class="table-bordered table-responsive table-condensed;">'
 
-cat <<HereDoc
+cat <<TableHeaders
  <tr>
    <th colspan='5'>Service Name:</th>
    <th colspan='5'>Environment:</th>
-   <th>Tag:</th>
+   <th colspan='5'>Tag:</th>
+   <th colspan='3'>Ports:</th>
   </tr>
-HereDoc
+TableHeaders
 
 for stack in ${stacks}; do
   int=`echo $stack | grep -o "\d*"`
@@ -76,8 +77,18 @@ for stack in ${stacks}; do
 
       stack_name=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/labels/io.rancher.stack.name`
 
+      for portno in ${ports}; do
+          portmap=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/ports/$portno`
+          port_list="$portmap,"
+          ports_=`echo $port_list | sed 's/,$//'`
+      done
+
       echo "<td colspan='5'>"
        echo $stack_name
+      echo "</td>"
+
+      echo "<td colspan='3'>"
+       echo $ports_
       echo "</td>"
 
     echo "</tr>"
