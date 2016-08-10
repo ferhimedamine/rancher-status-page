@@ -40,6 +40,8 @@ For bugs, questions, comments, corrections, suggestions, etc., open an issue in
 
 Or just [click here](https://github.com/Demandbase/rancher-status-page/issues/new) to create a new issue.
 
+Pull Requests are also welcome!
+
 ## Hit it from the Demandbase Office VPN:
 
 http://rancher-dev.demandbase.com/
