@@ -1,5 +1,4 @@
 [![](https://images.microbadger.com/badges/image/demandbase/rancher_status_page.svg)](http://microbadger.com/images/demandbase/rancher_status_page "Get your own image badge on microbadger.com")
-
 [![](https://images.microbadger.com/badges/version/demandbase/rancher_status_page.svg)](http://microbadger.com/images/demandbase/rancher_status_page "Get your own version badge on microbadger.com")
 
 # Rancher-Status-Page:
@@ -32,7 +31,7 @@
 
 ## Screenshot:
 
-![Screenshot of Rancher Status Page](https://raw.githubusercontent.com/Demandbase/rancher-status-page/images/master/rancher-status-page-screenshot.png)
+![Screenshot of Rancher Status Page](https://raw.githubusercontent.com/Demandbase/rancher-status-page/master/images/rancher-status-page-screenshot.png)
 
 ## Contact
 
