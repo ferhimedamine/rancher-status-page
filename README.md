@@ -63,7 +63,6 @@ http://rancher-prod.demandbase.com/
         * `docker-machine ssh rancher-server`
 
         * `sudo docker run -d --restart=always -p 8080:8080 rancher/server`
-          rancher-server VM's IP off its eth0 network interface.
 
     * `docker-machine create -d virtualbox --virtualbox-boot2docker-url rancheros.iso rancher-client`
 
