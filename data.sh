@@ -77,6 +77,9 @@ for stack in ${stacks}; do
 
       stack_name=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/labels/io.rancher.stack.name`
 
+      ports=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/ports/`
+      port_list=""
+
       for portno in ${ports}; do
           portmap=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/ports/$portno`
           port_list="$portmap,"
