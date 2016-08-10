@@ -34,3 +34,36 @@ http://rancher-staging.demandbase.com/
 
 http://rancher-prod.demandbase.com/
 
+----
+
+## Developing / Adding to rancher-status-page locally:
+  * Run these in order (links for reference below):
+
+    http://docs.rancher.com/os/running-rancheros/workstation/docker-machine/
+    http://docs.rancher.com/rancher/v1.2/en/installing-rancher/installing-server/):
+
+    * `docker-machine create -d virtualbox --virtualbox-boot2docker-url rancheros.iso rancher-server` 
+
+        * `docker-machine ssh rancher-server`
+
+        * `sudo docker run -d --restart=always -p 8080:8080 rancher/server`
+          rancher-server VM's IP off its eth0 network interface.
+
+    * `docker-machine create -d virtualbox --virtualbox-boot2docker-url rancheros.iso rancher-client`
+
+        * `docker-machine ssh rancher-client`
+
+    * After the container starts, setup port-forwarding on 8080 through your VM-provider for your rancher-server machine, and add a host to your rancher-setup
+      by running the rancher-agent container on your rancher-client machine.  Be sure to use the IP bound to your eth0 interface in your rancher-server VM.
+
+    * Create API keys (http://docs.rancher.com/rancher/v1.2/en/api/api-keys/).
+   
+    * Run your rancher-status-page container by populating the `rancher_env.sh` script in this repository with your new API keys and RANCHER URl settings from API->Add Environment API Key,
+      and running the rancher-compose command after sourcing the script's environment:
+
+      * `source rancher_env.sh` 
+      * Be sure to set DOCKER_TAG to latest:
+        
+        `export DOCKER_TAG=latest`
+
+      * `rancher-compose --verbose -f rancher-compose.yml -p rancher-status up --upgrade --confirm-upgrade --pull -d`
