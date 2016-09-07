@@ -84,7 +84,7 @@ for stack in ${stacks}; do
 
       for portno in ${ports}; do
           portmap=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/ports/$portno`
-          port_list="$port_list,$portmap"
+          port_list="$port_list, $portmap"
           ports_=`echo $port_list | sed 's/,$//'`
           ports_=`echo $ports_ | sed 's/^,//'`
       done
