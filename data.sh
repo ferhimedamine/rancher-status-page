@@ -58,7 +58,7 @@ cat <<TableHeaders
 TableHeaders
 
 for stack in ${stacks}; do
-  int=`echo $stack | grep -o "\d*"`
+  int=`echo $stack | grep -o "^\d*"`
   containers=`curl -s rancher-metadata/latest/stacks/$int/services/`
     
   for ind_container in ${containers}; do
