@@ -30,7 +30,7 @@ StartRows
 
 for host in ${result}; do
 
-    hostname=`echo $host | sed 's/\d*=//'`
+    hostname=`echo $host | sed 's/^\d*=//'`
     echo "<tr>"
       echo "<td>"
         echo $hostname
@@ -62,13 +62,13 @@ for stack in ${stacks}; do
   containers=`curl -s rancher-metadata/latest/stacks/$int/services/`
     
   for ind_container in ${containers}; do
-    container_name=`echo $ind_container | sed 's/\d*=//'`
+    container_name=`echo $ind_container | sed 's/^\d*=//'`
     echo "<tr>"
       echo "<td colspan='5'>"
         echo $container_name
       echo "</td>"
 
-      serv_int=`echo $ind_container | grep -o "\d*"`
+      serv_int=`echo $ind_container | grep -o "^\d*"`
       env_name=`curl -s rancher-metadata/latest/stacks/$int/environment_name`
 
       echo "<td colspan='5'>"
