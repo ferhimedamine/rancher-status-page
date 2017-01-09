@@ -12,6 +12,7 @@ rancher-status-lb:
     io.rancher.stack.name: "rancher-status-load-balancer"
     io.rancher.container.hostname_override: "rancher-status-load-balancer"
     io.rancher.scheduler.global: "true"
+    io.rancher.scheduler.affinity:host_label: cluster-type=default
   health_check:
     port: 42
     interval: 300
@@ -27,6 +28,7 @@ rancher-status:
     io.rancher.container.hostname_override: "rancher-status-page"
     io.rancher.scheduler.global: "true"
     io.rancher.container.network: "true"
+    io.rancher.scheduler.affinity:host_label: cluster-type=default
   stdin_open: true
   tty: true
   health_check:
