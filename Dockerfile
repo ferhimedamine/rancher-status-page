@@ -1,19 +1,16 @@
-FROM demandbase/db-alpine-node:v5.10.1
+FROM node:7.4-alpine
+MAINTAINER devops@demandbase.com
 
-RUN mkdir /app
-
-COPY . /app/
+RUN mkdir -p /app
 
 WORKDIR /app/
+COPY . /app/
 
-RUN ls /app/*
-
-RUN apk update && \
-    apk add curl && \
+RUN apk --no-cache add \
+         curl && \
     npm install -g node-json2html
 
 EXPOSE 8889
 
 ENTRYPOINT ["node"]
 CMD ["app.js"]
-
