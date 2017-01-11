@@ -45,7 +45,7 @@ echo '<div class="container" style="margin-top: 20px;">'
 
 # Generate tables
 export stacks=`curl -s rancher-metadata/latest/stacks/`
-    
+
 echo '<table style="width:100%; margin-top: 20px; margin-bottom: 20px;" class="table-bordered table-responsive table-condensed;">'
 
 cat <<TableHeaders
@@ -53,6 +53,7 @@ cat <<TableHeaders
    <th colspan='5'>Service Name:</th>
    <th colspan='5'>Environment:</th>
    <th colspan='5'>Tag:</th>
+   <th colspan='5'>Version SHA:</th>
    <th colspan='3'>Ports:</th>
   </tr>
 TableHeaders
@@ -60,12 +61,12 @@ TableHeaders
 for stack in ${stacks}; do
   int=`echo $stack | grep -o "^\d*"`
   containers=`curl -s rancher-metadata/latest/stacks/$int/services/`
-    
+
   for ind_container in ${containers}; do
     container_name=`echo $ind_container | sed 's/^\d*=//'`
     echo "<tr>"
       echo "<td colspan='5'>"
-        echo $container_name
+        echo ${stack}/$container_name
       echo "</td>"
 
       serv_int=`echo $ind_container | grep -o "^\d*"`
@@ -76,6 +77,11 @@ for stack in ${stacks}; do
       echo "</td>"
 
       stack_name=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/labels/io.rancher.stack.name`
+
+      #Get Container VCS versions
+      VCS_URL=`curl -s rancher-metadata/latest/stacks/${int}/services/${container_name}/labels/org.label-schema.vcs-url | awk -F: {'print $2'} | sed -e s/\.git//g`
+      VCS_REF=`curl -s rancher-metadata/latest/stacks/${int}/services/${container_name}/labels/org.label-schema.vcs-ref`
+      VCS_URL="https://github.com/${VCS_URL}/commit/${VCS_REF}"
 
       ports=`curl -s rancher-metadata/latest/stacks/$int/services/$serv_int/ports/`
       port_list=""
@@ -88,6 +94,14 @@ for stack in ${stacks}; do
           ports_=`echo $port_list | sed 's/,$//'`
           ports_=`echo $ports_ | sed 's/^,//'`
       done
+
+      echo "<td colspan='5'>"
+       echo $stack_name
+      echo "</td>"
+
+      echo "<td colspan='5'>"
+       echo "<a href="${VCS_URL}">${VCS_REF}</a>"
+      echo "</td>"
 
       echo "<td colspan='5'>"
        echo $stack_name
