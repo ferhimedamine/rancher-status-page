@@ -103,10 +103,6 @@ for stack in ${stacks}; do
        echo "<a href="${VCS_URL}">${VCS_REF}</a>"
       echo "</td>"
 
-      echo "<td colspan='5'>"
-       echo $stack_name
-      echo "</td>"
-
       echo "<td colspan='3'>"
        echo $ports_
       echo "</td>"
