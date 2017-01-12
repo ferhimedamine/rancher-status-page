@@ -64,9 +64,12 @@ for stack in ${stacks}; do
 
   for ind_container in ${containers}; do
     container_name=`echo $ind_container | sed 's/^\d*=//'`
+
+    stack_=`echo $stack | sed 's/^\d*=//'`
+
     echo "<tr>"
       echo "<td colspan='5'>"
-        echo ${stack}/$container_name
+        echo ${stack_}/$container_name
       echo "</td>"
 
       serv_int=`echo $ind_container | grep -o "^\d*"`
