@@ -1,6 +1,9 @@
 FROM node:7.4-alpine
 MAINTAINER devops@demandbase.com
 
+# Add bash. By default, alpine only has /bin/sh
+RUN apk add --no-cache bash
+
 RUN mkdir -p /app
 
 WORKDIR /app/
