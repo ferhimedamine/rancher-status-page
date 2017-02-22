@@ -1,7 +1,5 @@
 #!/bin/sh
 
-export result=`curl -s rancher-metadata/latest/hosts`
-
 cat <<HEADER
 <!DOCTYPE html>
 <html>
@@ -21,20 +19,36 @@ cat <<HEADER
 <div class="container" style="margin-top: 20px;">
 HEADER
 
-echo '<table style="width: 20%; margin-top: 20px;" class="table-bordered table-responsive table-condensed;">'
+echo '<table style="width: 60%; margin-top: 20px;" class="table-bordered table-responsive table-condensed;">'
 cat <<StartRows
+<h3>Infrastructure</h3>
  <tr>
-   <th>Hosts:</th>
+   <th>Hostname</th>
+   <th>Cluster</th>
+   <th>Instance ID</th>
+   <th>Operating System</th>
+   <th>Docker Version</th>
   </tr>
 StartRows
 
+#Loop over hosts in rancher-metadata to get host info
+export result=`curl -s rancher-metadata/latest/hosts`
 for host in ${result}; do
 
     hostname=`echo $host | sed 's/^\d*=//'`
+    host_id=`echo $host | awk -F= {'print $1'}`
+    name=`curl http://rancher-metadata/latest/hosts/${host_id}/name`
+    cluster=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/cluster-type`
+    instance_id=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/spotinst.instanceId`
+    os_version=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/os-version`
+    docker_version=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/io.rancher.host.docker_version`
+
     echo "<tr>"
-      echo "<td>"
-        echo $hostname
-      echo "</td>"
+        echo "<td>$hostname</td>"
+        echo "<td>${cluster}</td>"
+        echo "<td>${instance_id}</td>"
+        echo "<td>${os_version}</td>"
+        echo "<td>${docker_version}</td>"
     echo "</tr>"
 done
 echo "</table>"
@@ -46,6 +60,7 @@ echo '<div class="container" style="margin-top: 20px;">'
 # Generate tables
 export stacks=`curl -s rancher-metadata/latest/stacks/`
 
+echo "<h3>Stacks</h3>"
 echo '<table style="width:100%; margin-top: 20px; margin-bottom: 20px;" class="table-bordered table-responsive table-condensed;">'
 
 cat <<TableHeaders

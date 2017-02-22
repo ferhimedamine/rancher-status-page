@@ -7,7 +7,7 @@ WORKDIR /app/
 COPY . /app/
 
 RUN apk --no-cache add \
-         curl bash && \
+    curl bash && \
     npm install -g node-json2html
 
 EXPOSE 8889
