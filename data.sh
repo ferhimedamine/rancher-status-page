@@ -19,9 +19,9 @@ cat <<HEADER
 <div class="container" style="margin-top: 20px;">
 HEADER
 
-echo '<table style="width: 20%; margin-top: 20px;" class="table-bordered table-responsive table-condensed;">'
+echo '<table style="width: 60%; margin-top: 20px;" class="table-bordered table-responsive table-condensed;">'
 cat <<StartRows
-<h3>Hosts</h3>
+<h3>Infrastructure</h3>
  <tr>
    <th>Hostname</th>
    <th>Cluster</th>
@@ -40,7 +40,7 @@ for host in ${result}; do
     name=`curl http://rancher-metadata/latest/hosts/${host_id}/name`
     cluster=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/cluster-type`
     instance_id=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/spotinst.instanceId`
-    os_version=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/os_version`
+    os_version=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/os-version`
     docker_version=`curl http://rancher-metadata/latest/hosts/${host_id}/labels/io.rancher.host.docker_version`
 
     echo "<tr>"
