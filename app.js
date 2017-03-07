@@ -11,6 +11,8 @@ html     = "";
 
 
 http.createServer(function(request, response) {
+     // sleep for 30 seconds before re-creating page
+     child_process.execSync("sleep 30");
      fs.open('index.html', 'w', (err, fd) => {
        // => [Error: EISDIR: illegal operation on a directory, open <directory>]
 
