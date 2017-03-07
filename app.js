@@ -4,17 +4,13 @@
 const spawn = require('child_process').spawn;
 
 var http = require('http'),
-    fs   = require('fs'),
-    sleep = require('sleep');
+    fs   = require('fs');
 
 html     = "";
 
 console.log("listening on port 8889");
 
 http.createServer(function(request, response) {
-     // sleep for 30 seconds before re-creating page
-     sleep.sleep(30);
-
      console.log("Re-generating status page");
      fs.open('index.html', 'w', (err, fd) => {
        // => [Error: EISDIR: illegal operation on a directory, open <directory>]

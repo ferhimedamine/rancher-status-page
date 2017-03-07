@@ -7,15 +7,13 @@ WORKDIR /app/
 
 RUN set -ex && \
         buildDeps=' \
-                build-base \
         ' && \
         runDeps=' \
                 curl \
                 bash \
-                python \
         ' && \
         apk --no-cache add $buildDeps $runDeps && \
-        npm install node-json2html sleep && \
+        npm install node-json2html && \
         apk del $buildDeps
 
 COPY . /app/
