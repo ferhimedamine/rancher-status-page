@@ -19,12 +19,9 @@ http.createServer(function(request, response) {
        const script_call = spawn('sh', ['data.sh']);
 
        script_call.stdout.on('data', (data) => {
-         console.log(`${data}`);
          fs.appendFile(fd, data, function(error) {
             if (error) {
               console.error("write error:  " + error.message);
-            } else {
-              console.log("Successful Write to index.html");
             }
          });
        });
