@@ -11,7 +11,6 @@ html     = "";
 console.log("listening on port 8889");
 
 http.createServer(function(request, response) {
-     console.log("Re-generating status page");
      fs.open('index.html', 'w', (err, fd) => {
        // => [Error: EISDIR: illegal operation on a directory, open <directory>]
 
