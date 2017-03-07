@@ -8,7 +8,7 @@ COPY . /app/
 
 RUN apk --no-cache add \
     curl bash && \
-    npm install -g node-json2html
+    npm install -g node-json2html sleep
 
 EXPOSE 8889
 
