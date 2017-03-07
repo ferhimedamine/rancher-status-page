@@ -38,9 +38,9 @@ for host in ${result}; do
     hostname=`echo $host | sed 's/^\d*=//'`
     host_id=`echo $host | awk -F= {'print $1'}`
     name=`curl -s http://rancher-metadata/latest/hosts/${host_id}/name`
-    cluster=`curl s- http://rancher-metadata/latest/hosts/${host_id}/labels/cluster-type`
+    cluster=`curl -s http://rancher-metadata/latest/hosts/${host_id}/labels/cluster-type`
     instance_id=`curl -s http://rancher-metadata/latest/hosts/${host_id}/labels/spotinst.instanceId`
-    os_version=`curl s- http://rancher-metadata/latest/hosts/${host_id}/labels/os-version`
+    os_version=`curl -s http://rancher-metadata/latest/hosts/${host_id}/labels/os-version`
     docker_version=`curl -s http://rancher-metadata/latest/hosts/${host_id}/labels/io.rancher.host.docker_version`
 
     echo "<tr>"
